@@ -1,10 +1,17 @@
 const searchBook = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
+
     //console.log(searchText);
 
+
+
+
+
+    //clear data
     searchField.value = '';
 
+    //load data
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
     //console.log(url);
     fetch(url)
@@ -13,8 +20,11 @@ const searchBook = () => {
 }
 
 
+
+
 const displaySearchResult = docs => {
     const searchResult = document.getElementById('search-result');
+    searchResult.innerHTML = '';
     docs.forEach(doc => {
         console.log(doc);
         const div = document.createElement('div');
@@ -26,12 +36,16 @@ const displaySearchResult = docs => {
                  <img src="https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg" class="card-img-top" alt="...">
                  <div class="card-body">
                      <h5 class="card-title">${doc.title_suggest}</h5>
-                     <p class="card-text">${doc.author_name}</p>
-                     <p class="card-text">${doc.first_publish_year}</p>
+                     <p class="card-text">Author:${doc.author_name}</p>
+                     <p class="card-text">Publish Year${doc.first_publish_year}</p>
                  </div>
              </div>
+            
+
+            
          
          `;
         searchResult.appendChild(div);
+
     })
 }
